@@ -3,7 +3,7 @@ title: "Intro to R Notebooks"
 output: html_notebook
 ---
 
-# About this R Notebook
+## About this R Notebook
 
 R Notebooks are a 'flavor' of R markdown that combine plain text with R commands in code chunks. You can (and should!) edit them with your own notes. Don't forget to save every few minutes, like anything else!
 
@@ -18,26 +18,33 @@ Keyboard shortcuts:
  - run everything in the current code chunk: *ctrl + shift + enter*
  - insert a new code chunk: *ctrl + alt + i*
 
-# Run Code
+## Run Code
 
 ```{r chunk01}
 x = "Hello World!"
 x
 ```
 
+\
+
 ```{r chunk02}
 LETTERS[1:5]
 ```
 
-# YOUR TURN
+\
 
-Compute the product of the integers from 1 to 5. [Answer](https://bit.ly/3rnlOaY)
+## YOUR TURN
+
+Compute the product of the numbers from 1 to 5. [Answer](https://bit.ly/3rnlOaY)
 
 ```{r chunk03}
-# Your answer here
+## Your answer here
+
 ```
 
-# Plot a Cosine Wave
+\
+
+## Plot a Cosine Wave
 
 Run the following:
 
@@ -47,15 +54,16 @@ xvals = 4 * pi * (0:100)/100
 plot(x = xvals, y = cos(xvals), type = "b")
 ```
 
-# YOUR TURN
+## YOUR TURN
 
-Plot a sine wave. [Answer](https://bit.ly/36NPmp2)
+Plot a sine wave [Answer](https://bit.ly/36NPmp2)
 
 ```{r chunk05}
-# Your answer here
+## Your answer here
+
 ```
 
-# Plot the Batman Logo
+## Plot the Batman Logo
 
 Run the following lines all at once:
 
@@ -76,31 +84,43 @@ plot(x=seq(-7,7,0.065), y=Vectorize(bm)(1:216, seq(-7,7,0.065)), col="#999900", 
 par(opar)
 ```
 
-# View the Attendee Map
+## Make a Map of SF Libraries from a Google Sheet
+
+First we import the Google Sheet:
 
 ```{r chunk07}
 library(googlesheets4)
+gs4_deauth()
+
+## Read the data frame from Google Sheets
+sheet_id <- "1Zm3BkQaW4vuk-X4L_6BOhFEyCr3HO_kSMktd-rHyXG8"
+sflib_tbl <- range_read(sheet_id, sheet = "sf_libraries")
+
+head(sflib_tbl)
+```
+
+\
+
+Now we can turn it into a simple feature data frame and map it:
+
+```{r chunk08}
 library(sf)
 library(leaflet)
 
-sheet_id <- "1lu2PBiKCK_A628ADY9opgpeqGmg0kc8JsV63KCYmLzo"
-
-## Read the data frame from Google Sheets
-gs4_deauth()
-pipo_df <- range_read(sheet_id, sheet = "Form Responses 1")
-
 ## Convert the data frame to a simple features data frame
-pipo_sf <- st_as_sf(pipo_df, coords = c("Lon", "Lat"), crs = 4326)
+sflib_sf <- st_as_sf(sflib_tbl, coords = c("lon", "lat"), crs = 4326) %>% 
+  select(branch, address, phone)
 
 ## Plot the locations in an interactive leaflet map
-leaflet(pipo_sf) %>% 
+leaflet(sflib_sf) %>% 
   addTiles() %>% 
   addCircleMarkers(radius = 5, color = "red", opacity = 0.5, 
-                   popup = ~paste0("<p><b>", `First Name`, "</b></p>",
-                                   "Favorite plant / animal: ", `Favorite plant or animal`, "</p>"))
+                   popup = ~paste0("<p><b>", branch, "</b></p>",
+                                   "<p>Address: ", address, "<br/>",
+                                   "Phone: ", phone, "</p>"))
 ```
 
-# End
+## End
 
 Congratulations on finishing the Notebook! Save it (again).
 
