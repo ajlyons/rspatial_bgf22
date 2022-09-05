@@ -106,6 +106,7 @@ Now we can turn it into a simple feature data frame and map it:
 
 ```{r chunk08}
 library(sf)
+library(dplyr)
 library(leaflet)
 
 ## Convert the data frame to a simple features data frame
