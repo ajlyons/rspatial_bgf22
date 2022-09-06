@@ -279,7 +279,55 @@ target="_blank">http://tidyverse.org</a></p>
 </div>
 <div id="specialty-packages" class="slide section level1">
 <h1>Specialty Packages</h1>
-<p>NULL</p>
+<h2>
+Ecology
+</h2>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sub-Field
+</th>
+<th style="text-align:left;">
+Package(s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Animal movement
+</td>
+<td style="text-align:left;font-family: monospace;">
+adehabitatHR/LT/MA, moveVis
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Community Ecology
+</td>
+<td style="text-align:left;font-family: monospace;">
+vegan
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Landscape Ecology
+</td>
+<td style="text-align:left;font-family: monospace;">
+landscapemetrics, spatialEco, SDMTools
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Species Distribution Models
+</td>
+<td style="text-align:left;font-family: monospace;">
+dismo
+</td>
+</tr>
+</tbody>
+</table>
 <p><br />
 </p>
 <p><em><strong>What other packages are used in your
@@ -310,9 +358,9 @@ from with the <tt>repos</tt> argument:</p>
 </p>
 <h3 id="from-github">From GitHub</h3>
 <p>A <strong>lot</strong> of packages are on GitHub. Install them with
-the <tt>devtools</tt> package:</p>
+the <tt>remotes</tt> package:</p>
 <div class="indented1 indented1r">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;ucanr-igis/uavimg&quot;</span>)</span></code></pre></div>
 </div>
 <p><br />
@@ -498,6 +546,7 @@ whichever package was loaded first.</p>
 <p>The <code>conflicted</code> package helps you avoid problems with
 duplicate function names, by specifying which one to prioritize <em>no
 matter what order</em> they were loaded.</p>
+<div class="indented1 indented1r">
 <div class="sourceCode" id="cb14"><pre
 class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,6 +557,7 @@ class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb14-1">
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># From here on out, anytime we call select() or filter(), R will</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># always use the dplyr version.</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div id="summary" class="slide section level1">
