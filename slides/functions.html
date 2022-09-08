@@ -6,10 +6,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Session 1 Review  " />
+  <meta name="author" content="Functions  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgf22 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgf22 '> https://ajlyons.github.io/rspatial_bgf22 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
-  <title>Spatial Data Analysis with R  BayGeo, Fall 2022</title>
+  <title>Functions</title>
   <style type="text/css">
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -235,149 +235,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 with R </span><br/><span class="course-subtitle">BayGeo, Fall
 2022</span></h1>
   <p class="author">
-Session 1 Review <br/><img src='images/computer_review_414x300.png'/>
+Functions <br/><img src='images/rsyntax_485x140x256.png'/>
   </p>
 </div>
-<div id="highlights-from-last-time" class="slide section level1">
-<h1>Highlights From Last Time</h1>
+<div id="working-with-functions" class="slide section level1">
+<h1>Working with Functions</h1>
+<script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<style type="text/css">
+span.operator {
+  font-family:monospace; 
+  color:dimgray; 
+  margin:0 1em;
+}
+</style>
 <script>
   addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-<h2 id="good-coding-practices">Good Coding Practices</h2>
-<div class="indented2">
-<p><strong>RStudio</strong> is a great IDE</p>
-<p>Do your work in <strong>scripts</strong> (or
-<strong>Notebooks</strong>)</p>
-<p>We almost always save values to <strong>variables</strong>:</p>
-<div class="indented2">
-<code>pop_2010 &lt;- 3200 * 0.03</code>
-</div>
-<p>You can see the <strong>data type</strong> of a variable with
-<code>class()</code>:</p>
-<div class="indented2">
-<code>class(pop_2010)</code>
-</div>
-</div>
-<p><br />
-</p>
-<h2 id="packages"><a href="packages.html" target="_blank"
-rel="noopener">Packages</a></h2>
-<div class="indented2">
-<p><strong>packages</strong> are the key to productivity with R</p>
-<p>packages mainly provide additional <strong>functions</strong> (and
-sometimes <strong>data</strong>)</p>
-<p>key packages for geospatial data include
-<strong><code>sf</code></strong> and
-<strong><code>terra</code></strong></p>
-<p>the <strong><em>tidyverse</em></strong> is a family of packages that
-use <strong>piping syntax</strong></p>
-<p><strong>install</strong> packages from the ‘Packages’ pane in
-RStudio, or <code>install.packages()</code></p>
-<p><strong>load</strong> packages into memory with
-<strong><code>library()</code></strong></p>
-<p>to prevent clashes with duplicate function names, specify the package
-using the <code>pkgname::</code> prefix (e.g.,
-<code>dplyr::filter()</code>), or indicate your preferences using the
-<strong><code>conflicted</code></strong> package</p>
-</div>
-<p><br />
-</p>
-<h2 id="functions"><a href="syntax.html#(9)" target="_blank"
-rel="noopener">Functions</a></h2>
-<div class="indented2">
-<p>Most functions expect <strong>arguments</strong></p>
-<p>Arguments can be <strong>unnamed</strong> if you pass them in the
-right order</p>
-<p>Arguments with a default value are <strong>optional</strong></p>
-<p>All functions have <strong>help pages</strong></p>
-</div>
-<p><br />
-</p>
-<h2 id="importing-and-plotting-vector-data"><a
-href="importing-vector.html" target="_blank" rel="noopener">Importing
-and Plotting Vector Data</a></h2>
-<div class="indented2">
-<p><code>sf</code> is the primary package for importing and manipulating
-vector spatial data</p>
-<p>simple feature data frames are essentially regular data frames with a
-<strong>‘geometry’</strong> column</p>
-<p><strong>import</strong> GIS data with: <tt>st_read(<em>source</em>,
-<em>layer</em>)</tt></p>
-<div class="indented2">
-<p>where <em>source</em> can be a:</p>
-<div class="compact">
-<ul>
-<li>a folder (e.g, containing Shapefiles, geodatabase)<br />
-</li>
-<li>file (e.g., geojson file, KML file)<br />
-</li>
-<li>database connection string (e.g., “PG:dbname=postgis”)<br />
-</li>
-</ul>
-</div>
-<p><em>layer</em> is a named layer</p>
-</div>
-<p>view layers in a source with <code>st_layers()</code></p>
-<p>code to import Shapefiles, KMLs, GeoJSON, Geodatabase, GeoPackage</p>
-<p><code>st_as_sf()</code> to convert plain data frames into sf data
-frames</p>
-<p><code>plot()</code> works with sf objects</p>
-<div class="compact">
-<ul>
-<li>to plot just the outline try:
-<code>plot(ca_counties %&gt;% st_geometry())</code><br />
-</li>
-<li>to alter symbology by an attribute field use
-<code>plot(ca_counties["col_name"])</code><br />
-</li>
-</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>      <span class="co"># add numbers</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">^</span> <span class="dv">4</span>      <span class="co"># powers</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>( <span class="dv">49</span> ) <span class="co"># functions</span></span></code></pre></div>
+<p>The keys to R’s superpowers are <strong>functions</strong>! There are
+<strong>four things</strong> you need to know to use a function:</p>
+<style>img.stackme {position:absolute; top:0; left:0;}</style>
+<div style='position:relative; border:none; height:450px;width:901px; margin:0 auto; '>
+<img src="images/foo_01.png"/>
+<img src="images/foo_02.png" class="incremental stackme"/>
+<img src="images/foo_03.png" class="incremental stackme"/>
+<img src="images/foo_04.png" class="incremental stackme"/>
+<img src="images/foo_05.png" class="incremental stackme"/>
 </div>
 </div>
-<p><br />
-</p>
-<h2 id="files-and-folders"><a href="files-folders.html">Files and
-Folders</a></h2>
-<div class="indented2">
-<p>Always remember what your working directory is!</p>
-<p>You can view or change the working directory</p>
-<div class="indented1">
-<ul>
-<li>RStudio menu</li>
-<li><code>getwd()</code></li>
-<li><code>setwd()</code></li>
-</ul>
-</div>
-<p>When specifying directory paths the following characters have special
-meaning:</p>
-<div class="indented2">
-<p><code>"."</code>   <em>current working directory</em><br />
-<code>"~"</code>   <em>R home directory</em><br />
-<code>"/"</code>   <em>the root directory of the current volume
-(drive)</em></p>
-</div>
-<p><br />
-</p>
-<p><strong>Pro Tip:</strong> organize your work under a directory, and
-make a RStudio project in that directory</p>
-</div>
-</div>
-<div id="download-todays-notebooks" class="slide section level1">
-<h1>Download Today’s Notebooks</h1>
-<p>Make sure your working directory is the workshop folder, then:</p>
+<div id="function-arguments" class="slide section level1">
+<h1>Function Arguments</h1>
+<p>Many functions take arguments. Arguments can be
+<strong>required</strong> or <strong>optional</strong>.</p>
+<p>See the function’s help page to determine which arguments are
+expected.</p>
+<p><img src="./images/rnorm_help_16cols_930x690.png"
+style="border:1px solid gray; margin-left:1em;" /></p>
+<p>If you pass arguments to a function <strong>in the order
+expected</strong> and <strong>don’t skip any</strong>, you don’t have to
+name them:</p>
 <div class="indented1 indented1r">
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wrkshputils<span class="sc">::</span><span class="fu">wu_download</span>(<span class="st">&#39;https://ucdavis.box.com/shared/static/jgbhryxyqowm7nm7c2a7v7gvm4yuqvph.zip&#39;</span>, <span class="at">overwrite =</span>  <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="do">## generate 500 normally distributed random</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="do">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
 </div>
-<p>Look in the ‘Files’ pane to make sure they’re there!</p>
 <p><br />
 </p>
-<h2 id="warm-up-exercise">Warm-up Exercise</h2>
-<p><a href='https://raw.githubusercontent.com/ajlyons/rspatial_bgf22/master/notebooks/nb_session02_warmup.Rmd' target='_blank'>nb_session02_warmup.Rmd</a></p> <div class='nb_desc'>Warmup exercise for Session 2 - import and plot some vector data</div> <p style='font-size:80%;'><a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_session02_warmup.nb.html' target='_blank' rel='noopener' style='color:#8993d3;'>preview notebook</a> | <a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_session02_warmup_ans.nb.html' target='_blank' style='color:#8993d3;'>answer key</a></p>
+<p>If you don’t pass arguments in expected order (or skip some), you
+have to name them in the parentheses:</p>
+<div class="indented1 indented1r">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="fl">0.3</span>) <span class="do">## generate 100 normally distributed random</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## numbers with stand deviation = 0.3</span></span></code></pre></div>
+</div>
+<p><a href='https://raw.githubusercontent.com/ajlyons/rspatial_bgf22/master/notebooks/nb_syntax.Rmd' target='_blank'>nb_syntax.Rmd</a></p> <div class='nb_desc'>Review R syntax</div> <p style='font-size:80%;'><a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_syntax.nb.html' target='_blank' rel='noopener' style='color:#8993d3;'>preview notebook</a> | <a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_syntax_ans.nb.html' target='_blank' style='color:#8993d3;'>answer key</a></p>
+</div>
+<div id="future-topics" class="slide section level1">
+<h1>Future topics</h1>
+<div class="indented2">
+<ul>
+<li>filtering and subsetting data frames</li>
+<li>working with lists</li>
+<li>working with text</li>
+<li>more data types</li>
+<li>piping syntax</li>
+</ul>
+</div>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="rgis-integration.html">Integrating R
-&amp; GIS</a>
+<strong>Next: </strong> <a href="packages.html">Working with
+Packages</a>
 </p>
 </div>
 
