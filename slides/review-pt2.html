@@ -6,10 +6,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Functions  " />
+  <meta name="author" content="Session 3 Review  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgf22 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgf22 '> https://ajlyons.github.io/rspatial_bgf22 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
-  <title>Functions</title>
+  <title>Spatial Data Analysis with R  BayGeo, Fall 2022</title>
   <style type="text/css">
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -220,10 +220,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
   <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
-  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
-  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="../css/slidy_styles.css" />
   <meta name="duration" content="0" />
@@ -235,108 +231,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 with R </span><br/><span class="course-subtitle">BayGeo, Fall
 2022</span></h1>
   <p class="author">
-Functions <br/><img src='images/rsyntax_485x140x256.png'/>
+Session 3 Review <br/><img src='images/computer_review_414x300.png'/>
   </p>
 </div>
-<div id="working-with-functions" class="slide section level1">
-<h1>Working with Functions</h1>
-<script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
-<style type="text/css">
-span.operator {
-  font-family:monospace; 
-  color:dimgray; 
-  margin:0 1em;
-}
-</style>
-<script>
-  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>      <span class="co"># add numbers</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">^</span> <span class="dv">4</span>      <span class="co"># powers</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>( <span class="dv">49</span> ) <span class="co"># functions</span></span></code></pre></div>
-<p>The keys to R’s superpowers are <strong>functions</strong>! There are
-<strong>four things</strong> you need to know to use a function:</p>
-<style>img.stackme {position:absolute; top:0; left:0;}</style>
-<div style='position:relative; border:none; height:450px;width:901px; margin:0 auto; '>
-<img src="images/foo_01.png"/>
-<img src="images/foo_02.png" class="incremental stackme"/>
-<img src="images/foo_03.png" class="incremental stackme"/>
-<img src="images/foo_04.png" class="incremental stackme"/>
-<img src="images/foo_05.png" class="incremental stackme"/>
+<div id="common-manipulations-for-sf-objects"
+class="slide section level1">
+<h1><a href="sf-manip.html">Common Manipulations for sf Objects</a></h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<div class="indented2">
+<p>get the <strong>bounding box</strong>: <code>st_bbox()</code></p>
+<p>get the <strong>coordinates</strong> of a point layer as a 2-column
+matrix: <code>st_coordinates()</code></p>
+<p>view (or assign) the <strong>coordinate reference system</strong>:
+<code>st_crs()</code></p>
+<p><strong>(re)project</strong> to a different crs:
+<code>st_transform()</code></p>
+<p>refer to CRS / projections using their <strong>EPSG
+number</strong></p>
+<p>convert a <strong>regular data frame</strong> to a
+<strong>sf</strong> object: <code>st_as_sf()</code></p>
+<p><strong>export</strong> sf objects to standard GIS formats:
+<code>st_write()</code></p>
 </div>
 </div>
-<div id="function-arguments" class="slide section level1">
-<h1>Function Arguments</h1>
-<p>Many functions take arguments. Arguments can be
-<strong>required</strong> or <strong>optional</strong>.</p>
-<p>See the function’s help page to determine which arguments are
-expected.</p>
-<p><img src="./images/rnorm_help_16cols_930x690.png"
-style="border:1px solid gray; margin-left:1em;" /></p>
-<p>If you pass arguments to a function <strong>in the order
-expected</strong> and <strong>don’t skip any</strong>, you don’t have to
-name them:</p>
-<div class="indented1 indented1r">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="do">## generate 500 normally distributed random</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="do">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
+<div id="piping-syntax" class="slide section level1">
+<h1>Piping Syntax</h1>
+<div class="indented2">
+<p><tt>fun_a() <strong>%&gt;%</strong> fun_b() <strong>%&gt;%</strong>
+fun_c() <strong>%&gt;%</strong> … </tt></p>
+<pre style="background-color:white; border:none;">
+iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.Length)
+<span style="color:DimGrey;">  │        │                             │
+  │        │                             └─ create a new column
+  │        │
+  │        ├─ select those rows where Sepal.Length > 7
+  │        └─ don't have to specify the data frame
+  │    
+  └ start with this data frame 
+</span></pre>
+</div>
+<div class="indented2" style="font-family:monospace">
+<p>ca_counties %&gt;%<br />
+  st_transform(4326) %&gt;%<br />
+  st_geometry() %&gt;%<br />
+  plot()</p>
 </div>
 <p><br />
 </p>
-<p>If you don’t pass arguments in expected order (or skip some), you
-have to name them in the parentheses:</p>
-<div class="indented1 indented1r">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="fl">0.3</span>) <span class="do">## generate 100 normally distributed random</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## numbers with stand deviation = 0.3</span></span></code></pre></div>
 </div>
-</div>
-<div id="pipes" class="slide section level1">
-<h1>Pipes</h1>
-<p><strong>Piping syntax</strong> is an alternative way of writing
-arguments into functions. It helps when you are using several functions
-in one expression:</p>
-<p>Consider the expression:</p>
-<div style="margin-left:4em; font-family:monospace;">
-<p>sum(sd(log(runif(100))))</p>
-</div>
-<p>Piping is an alternative way of writing functions that uses the pipe
-operator <code>%&gt;%</code> or <code>|&gt;</code> to ‘feed’ the result
-of one function into the next function:</p>
-<div style="margin-left:4em; font-family:monospace;">
-<p>fun_a() %&gt;% fun_b() %&gt;% fun_c() %&gt;% …</p>
-</div>
-<p>Piping allows the results of one function to be passed as the
-<strong>first argument</strong> of the next function. Hence a series of
-commands to be written like a sentence.</p>
-<pre style="background-color:white; border:none; color:black; font-family:monospace; font-size:20pt; font-weight:normal; margin-left:4em;">
-fun_a(x, ...) %>% fun_b(x, ...) %>% fun_c(x, ...) %>% ...
-            │           ￪     │           ￪ 
-            └───────────┘     └───────────┘
-</pre>
-<p>So the following are <em>equivalent</em>:</p>
-<div class="indented2">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sd</span>(<span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">100</span>))))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">sd</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span></code></pre></div>
+<div id="mapping-with-tmap" class="slide section level1">
+<h1>Mapping with <code>tmap</code></h1>
+<p>Build a tmap object by adding together functions that:</p>
+<div class="compact">
+<ol style="list-style-type: decimal">
+<li>Set data sources<br />
+</li>
+<li>Draw features<br />
+</li>
+<li>Add map elements<br />
+</li>
+<li>Set global map properties<br />
+</li>
+</ol>
 </div>
 <p><br />
 </p>
-<div class="protip">
-<p>RStudio keyboard shortcut for pipe operator:</p>
+<p>Example:</p>
 <div class="indented2">
-<p><code>ctrl + shift + m</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(yose_bnd_ll) <span class="sc">+</span>                             <span class="do">## Specify data source</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span>                                   <span class="do">## Display function </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(yose_hp) <span class="sc">+</span>                                 <span class="do">## Specify (another) data source</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_symbols</span>(<span class="at">size=</span><span class="fl">0.5</span>, <span class="at">col=</span><span class="st">&quot;navy&quot;</span>) <span class="sc">+</span>                <span class="do">## Display function </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(yose_roads) <span class="sc">+</span>                              <span class="do">## Specify (another) data source</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>(<span class="at">col=</span><span class="st">&quot;gray60&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>, <span class="at">lty=</span><span class="st">&quot;dotted&quot;</span>) <span class="sc">+</span>   <span class="do">## Display function </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_scale_bar</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>)) <span class="sc">+</span>       <span class="do">## Global element - scale bar</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_compass</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>)) <span class="sc">+</span>          <span class="do">## Global element - north arrow</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_style</span>(<span class="st">&quot;cobalt&quot;</span>)                                  <span class="do">## Global style preset (default colors)</span></span></code></pre></div>
 </div>
-<p>Configure the shortcut under Global Options &gt;&gt; Code</p>
-<div class="indented2">
-<p><code>%&gt;%</code> (default)</p>
-<p><code>|&gt;</code> (‘native’ pipe introduced R4.0)</p>
-</div>
-</div>
-<p><a href='https://raw.githubusercontent.com/ajlyons/rspatial_bgf22/master/notebooks/nb_syntax.Rmd' target='_blank'>nb_syntax.Rmd</a></p> <div class='nb_desc'>Review R syntax</div> <p style='font-size:80%;'><a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_syntax.nb.html' target='_blank' rel='noopener' style='color:#8993d3;'>preview notebook</a> | <a href='https://ajlyons.github.io/rspatial_bgf22/notebooks/nb_syntax_ans.nb.html' target='_blank' style='color:#8993d3;'>answer key</a></p>
+<p>Select static <em>plot</em> or interactive <em>view</em> mode with
+<code>tmap_mode()</code></p>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="sf-manip.html">Common Manipulations for
-sf Objects</a>
+<strong>Next: </strong> <a href="tables101.html">Tables 101</a>
 </p>
 </div>
 

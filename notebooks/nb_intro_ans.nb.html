@@ -5935,28 +5935,16 @@ par(opar)</code></pre>
 <p>First we import the Google Sheet:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnb29nbGVzaGVldHM0KVxuZ3M0X2RlYXV0aCgpXG5cbiMjIFJlYWQgdGhlIGRhdGEgZnJhbWUgZnJvbSBHb29nbGUgU2hlZXRzXG5zaGVldF9pZCA8LSBcIjFabTNCa1FhVzR2dWstWDRMXzZCT2hGRXlDcjNIT19rU01rdGQtckh5WEc4XCJcbnNmbGliX3RibCA8LSByYW5nZV9yZWFkKHNoZWV0X2lkLCBzaGVldCA9IFwic2ZfbGlicmFyaWVzXCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnb29nbGVzaGVldHM0KVxuZ3M0X2RlYXV0aCgpXG5cbiMjIFJlYWQgdGhlIGRhdGEgZnJhbWUgZnJvbSBHb29nbGUgU2hlZXRzXG5zaGVldF9pZCA8LSBcIjFabTNCa1FhVzR2dWstWDRMXzZCT2hGRXlDcjNIT19rU01rdGQtckh5WEc4XCJcbnNmbGliX3RibCA8LSByYW5nZV9yZWFkKHNoZWV0X2lkLCBzaGVldCA9IFwic2ZfbGlicmFyaWVzXCIpXG5cbmhlYWQoc2ZsaWJfdGJsKVxuYGBgIn0= -->
 <pre class="r"><code>library(googlesheets4)
 gs4_deauth()
 
 ## Read the data frame from Google Sheets
 sheet_id &lt;- &quot;1Zm3BkQaW4vuk-X4L_6BOhFEyCr3HO_kSMktd-rHyXG8&quot;
-sflib_tbl &lt;- range_read(sheet_id, sheet = &quot;sf_libraries&quot;)</code></pre>
+sflib_tbl &lt;- range_read(sheet_id, sheet = &quot;sf_libraries&quot;)
+
+head(sflib_tbl)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4pyUIFJlYWRpbmcgZnJvbSBMaWJyYXJpZXMgYW5kIEJyZXdlcmllcy5cbuKclCBSYW5nZSAnJ3NmX2xpYnJhcmllcycnLlxuIn0= -->
-<pre><code>✔ Reading from Libraries and Breweries.
-✔ Range &#39;&#39;sf_libraries&#39;&#39;.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChzZmxpYl90YmwpXG5gYGAifQ== -->
-<pre class="r"><code>head(sflib_tbl)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6MTUsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiNiDDlyAxNSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJyMVZ6V3NUUVJUZmZxUTExVFIrSWZVZ3pFRkJvWTNaSk50RUVjeHV1dHExbTZSczBrK2hNRzYyWm5HN0UzYTNhajFWOUNhQ0Z5dldneFhFUDhDRGVBeDQ4eUo2OEtiNGlYZ1I4U0JZd1RxN25RbkpHb3hmT0xENzNyejUvZDY4Ti9NZW93eE54bnNtZXhpRzZXQTYyOXVZamdCV21jQlk4Y2hBaXNFV1BHbGpPcG1nSzg5aTBEYXNoUEhYaTcrdXd4OFpiNlFaSWpjUXVabkk3VVQyTVhTNEsxM0VZU2VmbSthSnZrdmdwOFlsY1FMc0I3S1VHK0tCb09Uekk0VUJZVXdwNW5NRTFDdUlTbzZYd2JBb0hSMHVGb2kxTHpNczVmaGlmaUtIeWNOU0ZtUjVaUVRJdkVUV2Q0dGppampDZzNGZWxzVXBGOE1yNDFqSlN2SUl5SXJadkNMeE1zRUd4Y21NS0Jla3ZPS0x0WGR2Z3VYMmdUakhEWEJKTnRuTXlqV3h4bEpzdEprMWxXcmlZWkFkYklZZFRQbGlDWEZjRk1TVFRobndwN1VJcFhEUkpBZUtaZDBxZ1lKRHJWdTRhQlJra09VWTBDelZ3OE1zRytmQUtEcWpHVVlkZmhzTGppRmJBd1ZvV1RyRXpIbkxJVXViRXduc0s2dmJ0bzVNaitLTHFnQk5jTVNDcHFyYkt2cC94c1lvMmpQOEgyaWtudE9mVjY5NDlmcDV0Ym91djd3Z2tzeFhBWkcwbmoxZWRlYm0wM3ZUeTR2Vm1ldWI3bDU5LzZvNnM3d3llOGo1aXVYQng1ZjNmS2pPM0xqMXNIcGhLNWIzRDMxNnRGVGJUM2g5NTlMTzJ6dlN3ck1IejkrZHY1Z1dubDg3TUJmc1N3dHZYVGhLQ3krZlNHL3lLM2c5TkgxOGFWK05OMFg2NmhlbDc0d0NFOGd5U244L2FmVGFsdjA5cFpFZHFhL3BmdEJ3eGYwZ0F3MTlGbG1tRHZ2QmdRUWJZd2xyd0N2NnVGZnlMVWtKUW9yNWU2SVZzOWJDMGNhbWFjV0wwaWFQK2JxcUpaT2xzYksrcG10SmpQbHZSZmxCa1g5UTZwWWEyWnRHa1c0NmZLbGthYmI5RDJ5aGdtTnAyaytCalc5T3dJUnptazJpQ3RPTzFXa2hkcDF3VDZKTXdaVXlNalV5NllZTm0zU3F1ck5BY2JZREhZcnJPS2RYcUdvZ3M2WkNwNFpXa1ZYemFpQTFoME9pKzd1ZTV1a2V3VG5vcUdVM0VicXByWmNvZENPSnA3aFEwWHhKQmkxMEprSVREYmtKTHVMZjJ0cmFxdjgwVkFQYTlEU29zYWNFSFJpWnRkeW9HT2FiajlLTktnNHVIVXhxZDUvdWdJL2NadmtNM1dwNTNqd1ZUYnFPUGZQNkNCRzlxMDRQcjIvVnZrWmNCT2loYU9aSnZYWVBBUU9lMEF6NlNPRk12VVFqRlF2Zk9jMEFXKzJJZ3h4SWNUMHFNcWpGeTRuNTloMGhQMFFQcVFnQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["branch"],"name":[2],"type":["chr"],"align":["left"]},{"label":["phone"],"name":[3],"type":["chr"],"align":["left"]},{"label":["address"],"name":[4],"type":["chr"],"align":["left"]},{"label":["city"],"name":[5],"type":["chr"],"align":["left"]},{"label":["state"],"name":[6],"type":["chr"],"align":["left"]},{"label":["zip"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["lon"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["lat"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["score"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["locName"],"name":[11],"type":["chr"],"align":["left"]},{"label":["status"],"name":[12],"type":["chr"],"align":["left"]},{"label":["matchAddr"],"name":[13],"type":["chr"],"align":["left"]},{"label":["side"],"name":[14],"type":["chr"],"align":["left"]},{"label":["addressType"],"name":[15],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"ANZA","3":"(415) 355-5717","4":"550 37th Ave.","5":"San Francisco","6":"CA","7":"94121","8":"-122.4975","9":"37.77852","10":"100","11":"World","12":"M","13":"550 37th Ave, San Francisco, California, 94121","14":"R","15":"PointAddress"},{"1":"2","2":"BAYVIEW / LINDA BROOKS-BURTON","3":"(415) 355-5757","4":"5075 Third St.","5":"San Francisco","6":"CA","7":"94124","8":"-122.3914","9":"37.73254","10":"100","11":"World","12":"M","13":"5075 3rd St, San Francisco, California, 94124","14":"R","15":"PointAddress"},{"1":"3","2":"BERNAL HEIGHTS","3":"(415) 355-2810","4":"500 Cortland Ave.","5":"San Francisco","6":"CA","7":"94110","8":"-122.4160","9":"37.73899","10":"100","11":"World","12":"M","13":"500 Cortland Ave, San Francisco, California, 94110","14":"L","15":"PointAddress"},{"1":"4","2":"CHINATOWN / HIM MARK LAI","3":"(415) 355-2888","4":"1135 Powell St.","5":"San Francisco","6":"CA","7":"94108","8":"-122.4098","9":"37.79525","10":"100","11":"World","12":"M","13":"1135 Powell St, San Francisco, California, 94108","14":"L","15":"PointAddress"},{"1":"5","2":"EUREKA VALLEY / HARVEY MILK MEMORIAL","3":"(415) 355-5616","4":"1 Jose Sarria Court","5":"San Francisco","6":"CA","7":"94114","8":"-122.4317","9":"37.76423","10":"100","11":"World","12":"M","13":"1 Jose Sarria Ct, San Francisco, California, 94114","14":"R","15":"StreetAddress"},{"1":"6","2":"EXCELSIOR","3":"(415) 355-2868","4":"4400 Mission St.","5":"San Francisco","6":"CA","7":"94112","8":"-122.4331","9":"37.72697","10":"100","11":"World","12":"M","13":"4400 Mission St, San Francisco, California, 94112","14":"L","15":"PointAddress"}],"options":{"columns":{"min":{},"max":[10],"total":[15]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
