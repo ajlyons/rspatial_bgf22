@@ -1,14 +1,11 @@
-## Install sf before everything else
-## (b/c on Linux it installs by itself fine, but not as a dependency)
-if (!require(sf)) install.packages("sf")
-
 ## Required packages
-pkgs_req <- c("sp", "tmap", "tmaptools", "leaflet", "ggmap", "maptools", 
+pkgs_req <- c("sf", "leaflet", "tmap", "tmaptools", "leaflet", "ggmap", "maptools",
               "RColorBrewer", "raster", "maps", "tidyverse",  "jsonlite", 
               "rasterVis", "nngeo", "lwgeom", "remotes", 
               "conflicted", "tigris", "tidycensus", "stars",
               "googlesheets4", "httr", "rjson", "RSocrata", "usethis", "rinat",
-              "ggspatial", "rosm", "ggimage", "wrkshputils", "palmerpenguins")
+              "ggspatial", "rosm", "ggimage", "wrkshputils", "palmerpenguins", "here",
+              "terra")
 
 ## See which ones are missing
 (pkgs_missing <- pkgs_req[!(pkgs_req %in% installed.packages()[,"Package"])])
